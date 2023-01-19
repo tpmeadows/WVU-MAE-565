@@ -48,3 +48,5 @@ function B = GA(A)
     
     
 end
+
+hey zach can you see this???
