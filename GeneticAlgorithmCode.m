@@ -7,22 +7,22 @@ time = 0;
 max_time = 8*60;
 
 %total trip time in minutes
-av_bike_time = 35;
-av_car_time= 40;
-av_truck_time = 47;
+av_bike_time = 34;
+av_car_time= 39;
+av_truck_time = 46;
 time_std_dev = 5;
 
 %gallons per minute
-gas_bike = 2.4/60;
+gas_bike = 1.7/60;
 gas_car = 2.2/60;
-gas_truck = 3.6/60;
+gas_truck = 3.4/60;
 gas_std_dev = .005;
 
 %capacity per trip
-cap_bike = 12;
-cap_car = 30;
-cap_truck = 45;
-cap_std_dev = 3;
+cap_bike = 15;
+cap_car = 35;
+cap_truck = 50;
+cap_std_dev = 4;
 
 
 raw_data = zeros(1,9);
@@ -45,9 +45,9 @@ while time < 8*60
     truck_c = cap_truck + randn*cap_std_dev;
 
     
-    bike = bike_c /(bike_t*bike_g);
-    car = car_c / (car_t*car_g);
-    truck = truck_c / (truck_t*truck_g);
+    bike = (bike_t*bike_g) / bike_c;
+    car = (car_t*car_g) / car_c;
+    truck = (truck_t*truck_g) / truck_c;
     
     current_values = [bike_t,bike_g,bike_c,car_t,car_g,car_c,truck_t,truck_g,truck_c]
     data_hold = raw_data;
