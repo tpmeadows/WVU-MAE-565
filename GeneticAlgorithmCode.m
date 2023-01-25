@@ -7,9 +7,9 @@ time = 0;
 max_time = 8*60;
 
 %total trip time in minutes
-av_bike_time = 34;
-av_car_time= 39;
-av_truck_time = 46;
+av_bike_time = 39;
+av_car_time= 44;
+av_truck_time = 50;
 time_std_dev = 4;
 
 %gallons per minute
