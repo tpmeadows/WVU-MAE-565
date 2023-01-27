@@ -121,5 +121,11 @@ disp(s_w)
 %gas = 3.55; %per gallon
 %em = 8887; %gC02/gal of gasoline
 
+Little Grid Guy
+x = linspace(1,10,10) ;
+y = linspace(1,10,10) ; 
+[X,Y] = meshgrid(x,y) ;
+plot(X,Y,'.r')
+grid on
 
 
