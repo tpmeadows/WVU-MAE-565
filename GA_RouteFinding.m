@@ -24,7 +24,7 @@ moves = [0 1;1 0;0 -1;-1 0];
 m = 0.1*n; %# of mutated individuals
 c = 0.5*n; %# of reproducing individuals
 L0 = 8*v+2; %max # of stops
-pop(1:n) = struct('path',zeros(l,2),'turns',zeros(l,1),'distance',0,'delivered',0,'checklist',0);
+pop(1:n) = struct('path',zeros(L0,2),'turns',zeros(L0,1),'distance',0,'delivered',0,'checklist',0);
 
 %Criteria
 chk0 = 150; %# of visited houses
