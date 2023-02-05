@@ -152,14 +152,16 @@ while M_EF <= 0.8
         total_distance = 0;
         stops = [];
         a = 1;
+        b = 0;
         for j = 2:L0
             stops = pop0(i).path(a:j,:);
-            x = stops(j,1); y = stops(j,2);
+            c_stops = j-b;
+            x = stops(c_stops,1); y = stops(c_stops,2);
             if x == 0 && y == 0
                 carry = cap;
             end
 
-            if isempty(find(stops(1:j-1,1) == x & stops(1:j-1,2) == y,1)) == true ...
+            if isempty(find(stops(1:c_stops-1,1) == x & stops(1:c_stops-1,2) == y,1)) == true ...
                     && carry ~= 0 && (x ~= 0 || y ~= 0)
                 chk = chk - 1;
                 carry = carry - 1;
@@ -169,6 +171,7 @@ while M_EF <= 0.8
             if chk == 0
                 chk = chk0;
                 a = j;
+                b = b+j;
             end
 
             d = 1/v*sqrt((stops(j-1,1)-x)^2 + (stops(j-1,2)-y)^2);
