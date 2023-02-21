@@ -1,0 +1,83 @@
+%% PATH DRAWN IN REAL TIME EXAMPLE %%
+clear
+close all
+clc
+load("final_population.mat")
+
+ss = stateSpaceDubins([0 15; 0 15; 0 0]);
+ss.MinTurningRadius = 0.00000001;
+
+pathobj = navPath(ss);
+waypoints = [pop_f.path zeros(length(pop_f(1).path),1)];
+append(pathobj,waypoints);
+X = [pop_f.path];
+
+% Creating Data to Animate
+% Time array
+% t = linspace(0,100,100000);
+t=0 % Time
+tend=8 % end time
+dt=1/45; % Time step
+t=0:dt:tend;
+% Particle coordinates
+x = pathobj.States(:,1);
+y = pathobj.States(:,2);
+
+
+% Setting up the Plot
+figure; hold on
+title(sprintf('Delivery Path\nTime: %0.2f sec', t(1)), 'Interpreter', 'Latex');
+xlabel('x', 'Interpreter', 'Latex')
+ylabel('y', 'Interpreter', 'Latex')
+grid minor  % Adding grid lines
+axis equal  % Equal axis aspect ratio
+view(-37.5,30);  % Setting viewing angle
+
+% Create file name variable
+filename = 'animation.gif';
+% Plotting with no color to set axis limits
+plot(x,y,'Color','none');
+
+% Plotting the first iteration
+p = plot(x(1),y(1),'b');
+m = scatter(x(1),y(1),'filled','b');
+p1 = plot(x(1),y(1),'square','MarkerFaceColor','r');
+p1.MarkerSize = 2;
+m1 = scatter(x(1),y(1),'filled','r');
+% Iterating through the length of the time array
+for k = 2:length(x)
+    % Updating the line
+    p.XData = x(1:k);
+    p.YData = y(1:k);
+    % Updating the point
+    m.XData = x(k); 
+    m.YData = y(k);
+
+
+    % Updating the line
+    p1.XData = x(1:k);
+    p1.YData = y(1:k);
+    % Updating the point
+    m1.XData = x(k); 
+    m1.YData = y(k);
+    % Updating the title
+
+
+    title(sprintf('Delivery Path\nTime: %0.2f hour', t(k)),...
+    'Interpreter','Latex');
+
+    % Delay
+    pause(0.05)
+    % Saving the figure
+    frame = getframe(gcf);
+    im = frame2im(frame);
+    [imind,cm] = rgb2ind(im,256);
+    if k == 1
+        imwrite(imind,cm,filename,'gif', 'Loopcount',inf,...
+        'DelayTime',0.1);
+    else
+        imwrite(imind,cm,filename,'gif','WriteMode','append',...
+        'DelayTime',0.1);
+    end
+    hold off
+end
