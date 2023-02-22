@@ -21,7 +21,7 @@ v = 45; %mph
 cap = 20; %carrying capacity
 d = 1; %distance between points, miles
 
-n = 100; %pop size
+n = 500; %pop size
 moves = [0 1;1 0;0 -1;-1 0];
 m = round(0.10*n); %# of mutating individuals
 c = round(0.75*n); %# of reproducing individuals
@@ -191,66 +191,6 @@ while M_EF <= 0.9
                 mv_m = pop_m(i).turns(j+1);
                 j = j+1;
             end
-            
-%             if s ~= L0
-%                 r = incl(find(incl > s,1));
-%                 path_str = pop_m(i).path(r:end,:);
-%                 pop_m(i).path(s+1:end,:) = [];
-%                 turn_str = pop_m(i).turns(r:end);
-%                 pop_m(i).turns(s+1:end) = [];
-% 
-%                 direction = [];
-%                 stops = [0 0];
-%                 x = pos_m(1); y = pos_m(2);
-%                 p = 1;
-%                 while x ~= 0 || y ~= 0
-%                     if x ~= 0
-%                         direction(p,1) = 4;
-%                         x = x - 1;
-%                         stops(p,:) = [x y];
-%                         p = p+1;
-%                     elseif y ~= 0
-%                         direction(p,1) = 3;
-%                         y = y - 1;                        
-%                         stops(p,:) = [x y];
-%                         p = p+1;
-%                     end
-%                 end
-%                 pop_m(i).path = [pop_m(i).path;stops;path_str];
-%                 pop_m(i).turns = [pop_m(i).turns;direction;turn_str];
-%                 Lmf = length(pop_m(i).turns);
-%                 if Lmf > L0
-%                     pop_m(i).path = pop_m(i).path(1:L0,:);
-%                     pop_m(i).turns = pop_m(i).turns(1:L0,:);
-%                 elseif Lmf < L0
-%                     pos_m = pop_m(i).path(end,:);
-%                     turn_m = pop_m(i).turns(end);
-% 
-%                     k = LM(pos_m(1),pos_m(2));
-%                     ind = find(k ~= turn_m);
-%                     l = length(ind);
-%                     mv_m = k(ind(randi(l)));
-%                     pop_m(i).turns(end) = mv_m;
-%                     for j = Lmf:L0-1
-%                         b = pos_m + moves(mv_m,:);
-%                         if b(1) > 9 || b(1) < 0 || b(2) > 9 || b(2) < 0
-%                             k = LM(pos_m(1),pos_m(2));
-%                             ind = find(k ~= turn_m);
-%                             l = length(ind);
-%                             mv_m = k(ind(randi(l)));
-%                             pop_m(i).turns(j) = mv_m;
-%                             b = pos_m + moves(mv_m,:);
-%                         end
-%                         pop_m(i).path(j+1,:) = b;
-%                         pos_m = b;
-%                         k = LM(pos_m(1),pos_m(2));
-%                         ind = find(k ~= turn_m);
-%                         l = length(ind);
-%                         mv_m = k(ind(randi(l)));
-%                         pop_m(i).turns(j+1) = mv_m;
-%                     end
-%                 end
-%             end
             pop0(ind_m(i)) = pop_m(i);
         end
     end
