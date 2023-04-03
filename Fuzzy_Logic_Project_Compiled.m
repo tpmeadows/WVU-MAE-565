@@ -278,7 +278,7 @@ V = [ln n z p lp]; % Velocity Error %
 
 irm = X*V % Inferenece Rule Matrix %
 A = irm(4,3) % Recall specific matrix element (Row, Col) %
-
+disp (irm)
 t = 0:0.1:1; %s
 
 
